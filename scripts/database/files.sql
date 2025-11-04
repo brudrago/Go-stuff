@@ -1,0 +1,13 @@
+CREATE TABLE files (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
+    folder_id INT,
+    owner_id INT NOT NULL,
+    type VARCHAR(50) NOT NULL,
+    path VARCHAR(250) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL,
+    deleted BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (folder_id) REFERENCES folders(id) ON DELETE CASCADE
+    CONSTRAINT fk_owner FOREIGN KEY (owner_id) REFERENCES users(id) ON DELETE CASCADE
+)

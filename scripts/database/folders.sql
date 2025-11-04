@@ -1,0 +1,9 @@
+CREATE TABLE folders (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(60) NOT NULL,
+    parent_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL,
+    deleted BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (parent_id) REFERENCES folders(id) ON DELETE CASCADE
+);
