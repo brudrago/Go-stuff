@@ -1,4 +1,3 @@
--- Cria tabela de usuários (idempotente)
 CREATE TABLE IF NOT EXISTS users (
   id          BIGSERIAL PRIMARY KEY,
   name        VARCHAR(200) NOT NULL,
