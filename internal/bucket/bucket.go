@@ -1,16 +1,18 @@
 package bucket
 
 import (
+	"fmt"
 	"io"
 	"os"
+	"reflect"
 )
-
 
 type BucketType int
 
 const (
 	AwsProvider BucketType = iota
 )
+
 type BucketInterface interface {
 	Upload(io.Reader, string) error
 	Download(string, string) (os.File, error)
@@ -30,9 +32,10 @@ func New(bt BucketType, cfg any) (b *Bucket, err error) {
 		if rt.Name() != "AwsConfig" {
 			return nil, fmt.Errorf("invalid config type for AWS S3")
 		}
-		return
+		return &Bucket{}, nil
 	default:
-		return nil, fmt.Errorf("invalid config type for AWS S3")
+		return nil, fmt.Errorf("invalid bucket type")
+	}
 }
 
 func (b *Bucket) Upload(file io.Reader, key string) error {
